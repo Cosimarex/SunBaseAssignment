@@ -32,8 +32,20 @@ public class CanvasManager : MonoBehaviour
 
         foreach (Client client in RecievedData.clients)
         {
-            //instantiating ListPrefab for each client
+            // Instantiate the prefab for each client
             GameObject listItem = Instantiate(ListPrefab, ListContent.transform);
+
+            // Get the ListItem script attached to the instantiated prefab
+            ListItem listItemScript = listItem.GetComponent<ListItem>();
+
+            if (listItemScript != null)
+            {
+                // Get the ClientData for the client
+                ClientData clientData = RecievedData.data.ContainsKey(client.id+"") ? RecievedData.data[client.id+""] : null;
+
+                // Set the data in the ListItem script
+                listItemScript.SetData(client, clientData);
+            }
         }
     }
 }

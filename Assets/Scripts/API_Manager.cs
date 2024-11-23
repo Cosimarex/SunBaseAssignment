@@ -30,7 +30,9 @@ public class APIResponse
 
 public class API_Manager : MonoBehaviour
 {
+    [SerializeField]
     private string APIURL = "https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=client_data";
+
     public CanvasManager CanvasManager;
     void Start()
     {
