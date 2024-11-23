@@ -31,12 +31,15 @@ public class APIResponse
 public class API_Manager : MonoBehaviour
 {
     private string APIURL = "https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=client_data";
-
+    public CanvasManager CanvasManager;
     void Start()
+    {
+        FetchData();
+    }
+    public void FetchData()
     {
         StartCoroutine(FetchClientData(APIURL));
     }
-
     private IEnumerator FetchClientData(string url)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(url))
@@ -66,6 +69,8 @@ public class API_Manager : MonoBehaviour
                         var clientData = apiResponse.data[key];
                         Debug.Log($"Key: {key}, Name: {clientData.name}, Address: {clientData.address}, Points: {clientData.points}");
                     }
+
+                    CanvasManager.DataFetched(apiResponse);//Telling CanvasManager that Data is Fetched
                 }
                 catch (System.Exception ex)
                 {
