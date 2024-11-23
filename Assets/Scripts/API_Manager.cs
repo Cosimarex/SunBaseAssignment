@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class Client
@@ -23,38 +24,58 @@ public class ClientData
 public class APIResponse
 {
     public List<Client> clients;
-    public Dictionary<int, ClientData> data;
+    public Dictionary<string, ClientData> data;
+    public string label;
 }
-
 
 public class API_Manager : MonoBehaviour
 {
-    string APIURL = "https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=client_data";
+    private string APIURL = "https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=client_data";
+
     void Start()
     {
         StartCoroutine(FetchClientData(APIURL));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public IEnumerator FetchClientData(string url)
+    private IEnumerator FetchClientData(string url)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
+
             if (request.result == UnityWebRequest.Result.Success)
             {
-                var response = JsonUtility.FromJson<APIResponse>(request.downloadHandler.text);
-                Debug.Log("Fetching Clients Count : " + response.clients.Count);
+                
+                string jsonResponse = request.downloadHandler.text;
+                Debug.Log("Raw JSON Response: " + jsonResponse);//Raw Response
+
+                try
+                {
+                    APIResponse apiResponse = JsonConvert.DeserializeObject<APIResponse>(jsonResponse);//using newtonsoft.json due to dicitionary usage
+
+                    // Printing alldata fetched from api
+                    Debug.Log($"Clients Count: {apiResponse.clients.Count}");
+                    foreach (var client in apiResponse.clients)
+                    {
+                        Debug.Log($"Client ID: {client.id}, Label: {client.label}, IsManager: {client.isManager}");
+                    }
+
+                    Debug.Log($"Data Count: {apiResponse.data.Count}");
+                    foreach (var key in apiResponse.data.Keys)
+                    {
+                        var clientData = apiResponse.data[key];
+                        Debug.Log($"Key: {key}, Name: {clientData.name}, Address: {clientData.address}, Points: {clientData.points}");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError("Error parsing JSON: " + ex.Message);
+                }
             }
             else
             {
-                Debug.LogError("Data Fetching Failed");
+                Debug.LogError("Data Fetching Failed: " + request.error);
             }
         }
-    } 
+    }
 }
