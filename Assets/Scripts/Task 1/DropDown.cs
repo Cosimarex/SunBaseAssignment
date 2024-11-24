@@ -23,6 +23,6 @@ public class DropDown : MonoBehaviour
         }
 
         // Update the client list based on the selected filter
-        CanvasManager.ListClients();
+        StartCoroutine(CanvasManager.ListClients());
     }
 }

@@ -311,7 +311,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -380,8 +380,8 @@ MonoBehaviour:
   APIManager: {fileID: 1842968681}
   ListPrefab: {fileID: 1571779546131261459, guid: 2765635c4fa300e44905a0db2ff8792c, type: 3}
   ListContent: {fileID: 356305028}
-  ClientsFilter: 0
   Details: {fileID: 1662278078}
+  ClientsFilter: 0
 --- !u!1 &315511433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,10 +1044,10 @@ RectTransform:
   - {fileID: 1460552558}
   m_Father: {fileID: 218761973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.4, y: 0.73800004}
-  m_AnchorMax: {x: 0.60800004, y: 0.78031534}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 7.5, y: -277}
+  m_SizeDelta: {x: 375, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &726884808
 MonoBehaviour:
@@ -1243,10 +1243,10 @@ RectTransform:
   - {fileID: 1180931175}
   m_Father: {fileID: 218761973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.307, y: 0.15300001}
-  m_AnchorMax: {x: 0.7257708, y: 0.72244716}
-  m_AnchoredPosition: {x: 1.1430054, y: 1.0800781}
-  m_SizeDelta: {x: 0.27600098, y: 1.0800171}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 672.276, y: 738.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &796649968
 MonoBehaviour:
@@ -1860,7 +1860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.344849, y: -137.02197}
+  m_AnchoredPosition: {x: -12.344971, y: -137.02197}
   m_SizeDelta: {x: -74.194, y: 224.045}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1040776914
@@ -2083,7 +2083,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 218761974}
         m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
-        m_MethodName: RefetchData
+        m_MethodName: RefetchAllData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2727,6 +2727,7 @@ GameObject:
   - component: {fileID: 1662278081}
   - component: {fileID: 1662278080}
   - component: {fileID: 1662278082}
+  - component: {fileID: 1662278083}
   m_Layer: 5
   m_Name: Details
   m_TagString: Untagged
@@ -2808,6 +2809,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameTF: {fileID: 1005255187}
   OtherDetailsTF: {fileID: 1006788128}
+--- !u!114 &1662278083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662278078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4482923434d874ba2ad9b1f3156858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.75
 --- !u!1 &1667484676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2891,10 +2905,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1662278078}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1662278083}
+        m_TargetAssemblyTypeName: PopupAnimation, Assembly-CSharp
+        m_MethodName: ClosePopup
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class LineDrawer : MonoBehaviour
 {
@@ -75,7 +76,10 @@ public class LineDrawer : MonoBehaviour
             CircleCollider2D circleCollider = circle.GetComponent<CircleCollider2D>();
             if (circleCollider != null && DoesLineIntersectCircle(circleCollider))
             {
-                Destroy(circle);
+                circle.gameObject.transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack).OnComplete(() =>
+                {
+                    Destroy(circle); // Destroy after animation completes
+                });
             }
         }
     }
